@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "movie-server": {
+      "type": "stdio",
+      "command": "C:\\Users\\Care\\Desktop\\MCP From Scratch\\.venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\Users\\Care\\Desktop\\MCP From Scratch\\server\\mcp_server.py"
+      ],
+      "env": {}
+    }
+  }
+}

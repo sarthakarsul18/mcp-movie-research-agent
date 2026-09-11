@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "title": "Inception",
+    "year": 2010,
+    "director": "Christopher Nolan",
+    "genre": ["Action", "Sci-Fi", "Thriller"],
+    "rating": 8.8,
+    "actors": ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page", "Tom Hardy"],
+    "plot": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O."
+  },
+  {
+    "id": 2,
+    "title": "The Dark Knight",
+    "year": 2008,
+    "director": "Christopher Nolan",
+    "genre": ["Action", "Crime", "Drama"],
+    "rating": 9.0,
+    "actors": ["Christian Bale", "Heath Ledger", "Aaron Eckhart", "Michael Caine"],
+    "plot": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice."
+  },
+  {
+    "id": 3,
+    "title": "Interstellar",
+    "year": 2014,
+    "director": "Christopher Nolan",
+    "genre": ["Adventure", "Drama", "Sci-Fi"],
+    "rating": 8.7,
+    "actors": ["Matthew McConaughey", "Anne Hathaway", "Jessica Chastain", "Michael Caine"],
+    "plot": "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans."
+  },
+  {
+    "id": 4,
+    "title": "Oppenheimer",
+    "year": 2023,
+    "director": "Christopher Nolan",
+    "genre": ["Biography", "Drama", "History"],
+    "rating": 8.9,
+    "actors": ["Cillian Murphy", "Emily Blunt", "Matt Damon", "Robert Downey Jr."],
+    "plot": "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb during World War II."
+  },
+  {
+    "id": 5,
+    "title": "The Prestige",
+    "year": 2006,
+    "director": "Christopher Nolan",
+    "genre": ["Drama", "Mystery", "Sci-Fi"],
+    "rating": 8.5,
+    "actors": ["Christian Bale", "Hugh Jackman", "Scarlett Johansson", "Michael Caine"],
+    "plot": "After a tragic accident, two stage magicians in 1890s London engage in a battle to create the ultimate illusion while sacrificing everything they have to outwit each other."
+  },
+  {
+    "id": 6,
+    "title": "Memento",
+    "year": 2000,
+    "director": "Christopher Nolan",
+    "genre": ["Mystery", "Thriller"],
+    "rating": 8.4,
+    "actors": ["Guy Pearce", "Carrie-Anne Moss", "Joe Pantoliano"],
+    "plot": "A man with short-term memory loss attempts to track down his wife's murderer using an intricate system of Polaroid photographs and tattoos."
+  },
+  {
+    "id": 7,
+    "title": "Dunkirk",
+    "year": 2017,
+    "director": "Christopher Nolan",
+    "genre": ["Action", "Drama", "History"],
+    "rating": 7.8,
+    "actors": ["Fionn Whitehead", "Barry Keoghan", "Mark Rylance", "Tom Hardy"],
+    "plot": "Allied soldiers from Belgium, the British Commonwealth and Empire, and France are surrounded by the German Army and evacuated during a fierce battle in World War II."
+  },
+  {
+    "id": 8,
+    "title": "Tenet",
+    "year": 2020,
+    "director": "Christopher Nolan",
+    "genre": ["Action", "Sci-Fi", "Thriller"],
+    "rating": 7.3,
+    "actors": ["John David Washington", "Robert Pattinson", "Elizabeth Debicki", "Kenneth Branagh"],
+    "plot": "Armed with only one word, Tenet, and fighting for the survival of the entire world, a Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time."
+  },
+  {
+    "id": 9,
+    "title": "Batman Begins",
+    "year": 2005,
+    "director": "Christopher Nolan",
+    "genre": ["Action", "Crime", "Drama"],
+    "rating": 8.2,
+    "actors": ["Christian Bale", "Michael Caine", "Liam Neeson", "Katie Holmes"],
+    "plot": "After witnessing his parents' death, Bruce Wayne trains with the League of Shadows and returns to Gotham City to fight crime as Batman."
+  },
+  {
+    "id": 10,
+    "title": "The Dark Knight Rises",
+    "year": 2012,
+    "director": "Christopher Nolan",
+    "genre": ["Action", "Drama", "Thriller"],
+    "rating": 8.4,
+    "actors": ["Christian Bale", "Tom Hardy", "Anne Hathaway", "Gary Oldman"],
+    "plot": "Eight years after the Joker's reign of anarchy, Batman is forced from his exile with the help of the enigmatic Selina Kyle to defend Gotham from the brutal guerrilla terrorist Bane."
+  },
+  {
+    "id": 11,
+    "title": "Pulp Fiction",
+    "year": 1994,
+    "director": "Quentin Tarantino",
+    "genre": ["Crime", "Drama"],
+    "rating": 8.9,
+    "actors": ["John Travolta", "Uma Thurman", "Samuel L. Jackson", "Bruce Willis"],
+    "plot": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption."
+  },
+  {
+    "id": 12,
+    "title": "Django Unchained",
+    "year": 2012,
+    "director": "Quentin Tarantino",
+    "genre": ["Drama", "Western"],
+    "rating": 8.5,
+    "actors": ["Jamie Foxx", "Christoph Waltz", "Leonardo DiCaprio", "Kerry Washington"],
+    "plot": "With the help of a German bounty-hunter, a freed slave sets out to rescue his wife from a brutal plantation owner in Mississippi."
+  },
+  {
+    "id": 13,
+    "title": "Inglourious Basterds",
+    "year": 2009,
+    "director": "Quentin Tarantino",
+    "genre": ["Adventure", "Drama", "War"],
+    "rating": 8.4,
+    "actors": ["Brad Pitt", "Diane Kruger", "Eli Roth", "Christoph Waltz"],
+    "plot": "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans."
+  },
+  {
+    "id": 14,
+    "title": "Dune: Part One",
+    "year": 2021,
+    "director": "Denis Villeneuve",
+    "genre": ["Action", "Adventure", "Sci-Fi"],
+    "rating": 8.0,
+    "actors": ["Timothée Chalamet", "Rebecca Ferguson", "Zendaya", "Oscar Isaac"],
+    "plot": "A noble family becomes embroiled in a war for control over the galaxy's most valuable asset while its heir becomes troubled by visions of a dark future."
+  },
+  {
+    "id": 15,
+    "title": "Blade Runner 2049",
+    "year": 2017,
+    "director": "Denis Villeneuve",
+    "genre": ["Action", "Drama", "Mystery", "Sci-Fi"],
+    "rating": 8.0,
+    "actors": ["Ryan Gosling", "Harrison Ford", "Ana de Armas", "Sylvia Hoeks"],
+    "plot": "Young Blade Runner K's discovery of a long-buried secret leads him to track down former Blade Runner Rick Deckard, who's been missing for thirty years."
+  },
+  {
+    "id": 16,
+    "title": "Arrival",
+    "year": 2016,
+    "director": "Denis Villeneuve",
+    "genre": ["Drama", "Mystery", "Sci-Fi"],
+    "rating": 7.9,
+    "actors": ["Amy Adams", "Jeremy Renner", "Forest Whitaker"],
+    "plot": "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecraft appear around the world."
+  },
+  {
+    "id": 17,
+    "title": "The Departed",
+    "year": 2006,
+    "director": "Martin Scorsese",
+    "genre": ["Crime", "Drama", "Thriller"],
+    "rating": 8.5,
+    "actors": ["Leonardo DiCaprio", "Matt Damon", "Jack Nicholson", "Mark Wahlberg"],
+    "plot": "An undercover cop and a mole in the police attempt to identify each other while infiltrating an Irish gang in South Boston."
+  },
+  {
+    "id": 18,
+    "title": "Goodfellas",
+    "year": 1990,
+    "director": "Martin Scorsese",
+    "genre": ["Biography", "Crime", "Drama"],
+    "rating": 8.7,
+    "actors": ["Robert De Niro", "Ray Liotta", "Joe Pesci", "Lorraine Bracco"],
+    "plot": "The story of Henry Hill and his life in the mafia, covering his relationship with his wife Karen and his mob partners Jimmy Conway and Tommy DeVito."
+  },
+  {
+    "id": 19,
+    "title": "Jurassic Park",
+    "year": 1993,
+    "director": "Steven Spielberg",
+    "genre": ["Action", "Adventure", "Sci-Fi"],
+    "rating": 8.2,
+    "actors": ["Sam Neill", "Laura Dern", "Jeff Goldblum", "Richard Attenborough"],
+    "plot": "A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose."
+  },
+  {
+    "id": 20,
+    "title": "Gladiator",
+    "year": 2000,
+    "director": "Ridley Scott",
+    "genre": ["Action", "Adventure", "Drama"],
+    "rating": 8.5,
+    "actors": ["Russell Crowe", "Joaquin Phoenix", "Connie Nielsen", "Oliver Reed"],
+    "plot": "A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery."
+  }
+]

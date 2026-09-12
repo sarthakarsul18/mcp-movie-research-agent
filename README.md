@@ -15,7 +15,7 @@
   <i>Connecting an independent Python MCP server over standard I/O (<code>stdio</code>) with a LangGraph agent powered by Groq LLM — ready for both custom Python clients and external hosts (Claude Desktop, Cursor, Claude Code).</i>
 </p>
 
-[Key Features](#-key-features) • [Architecture](#-system-architecture) • [Quick Start](#-quick-start) • [How It Works](#-how-it-works-step-by-step) • [External Hosts](#-connecting-external-hosts) • [Learning Guide](#-the-10-core-concepts-explained)
+[Key Features](#-key-features) • [Architecture](#-system-architecture) • [Quick Start](#-quick-start) • [How It Works](#-how-it-works-step-by-step) • [External Hosts](#-connecting-external-hosts) • [Learning Guide](#-the-10-core-concepts-explained) • [Line-by-Line Code Guide](CODE_EXPLANATION.md)
 
 ---
 
@@ -90,6 +90,8 @@ mcp-movie-research-agent/
 ├── .mcp.json                 # Standard MCP configuration for external hosts
 ├── requirements.txt          # Pinned lightweight dependencies
 ├── README.md                 # Complete showcase & architecture guide
+├── CODE_EXPLANATION.md       # Exhaustive line-by-line code explanation manual
+├── LEARNING_GUIDE.md         # MCP Wire-protocol & theoretical deep dive
 │
 ├── .cursor/
 │   └── mcp.json              # Instant configuration for Cursor IDE

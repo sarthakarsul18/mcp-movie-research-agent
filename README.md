@@ -15,7 +15,7 @@
   <i>Connecting an independent Python MCP server over standard I/O (<code>stdio</code>) with a LangGraph agent powered by Groq LLM — ready for both custom Python clients and external hosts (Claude Desktop, Cursor, Claude Code).</i>
 </p>
 
-[Key Features](#-key-features) • [Architecture](#-system-architecture) • [Quick Start](#-quick-start) • [How It Works](#-how-it-works-step-by-step) • [External Hosts](#-connecting-external-hosts) • [Learning Guide](#-the-10-core-concepts-explained) • [Line-by-Line Code Guide](CODE_EXPLANATION.md)
+[Key Features](#-key-features) • [Architecture](#-system-architecture) • [Quick Start](#-quick-start) • [How It Works](#-how-it-works-step-by-step) • [External Hosts](#-connecting-external-hosts) • [Line-by-Line Code Guide](CODE_EXPLANATION.md) • [Interview Q&A Guide](INTERVIEW_QA.md)
 
 ---
 
@@ -91,6 +91,7 @@ mcp-movie-research-agent/
 ├── requirements.txt          # Pinned lightweight dependencies
 ├── README.md                 # Complete showcase & architecture guide
 ├── CODE_EXPLANATION.md       # Exhaustive line-by-line code explanation manual
+├── INTERVIEW_QA.md           # Technical interview masterclass & Q&A guide
 ├── LEARNING_GUIDE.md         # MCP Wire-protocol & theoretical deep dive
 │
 ├── .cursor/
@@ -293,6 +294,20 @@ What happens if a user asks about a movie **not** in `data/movies.json` (e.g. *T
 3. **Result**: Server returns `"No movies found matching query: 'Titanic'"`.
 4. **Guardrail**: The `SYSTEM_INSTRUCTION` guides the LLM not to loop endlessly.
 5. **Response**: The agent clearly informs the user that the title is not in the local database records, then provides a helpful general summary.
+
+---
+
+## 🎯 Interview Preparation & Masterclass
+
+Preparing for an interview as an **AI Engineer**, **GenAI Developer**, or **Agentic Systems Specialist**? 
+
+We have prepared a complete, battle-tested interview masterclass in [`INTERVIEW_QA.md`](INTERVIEW_QA.md) covering:
+- 🗣️ **Conversational spoken English answers** to explain clearly and impress hiring managers.
+- 💡 **Deep intuition & mental models** (Hinglish breakdown included).
+- 🔍 **Direct code & protocol references** for wire traces, error handling, and LangGraph states.
+- ⚡ **Rapid-fire one-liner cheat sheet** for instant recall.
+
+👉 **Read the full guide: [INTERVIEW_QA.md](INTERVIEW_QA.md)**
 
 ---
 

@@ -3,6 +3,7 @@
 This document provides a comprehensive, line-by-line breakdown of **every single file and every single line of code** in the entire project.
 
 For each file, you will find:
+
 1. **The Code Block**: Exact lines from the source.
 2. **Kyun Use Kiya? (Why it was written)**: The core rationale and problem it solves.
 3. **Kaise Kaam Karta Hai? (How it works under the hood)**: Low-level mechanics and protocol details.
@@ -11,6 +12,7 @@ For each file, you will find:
 ---
 
 ## 📑 File Navigation
+
 1. [`requirements.txt`](#1-requirementstxt)
 2. [`.env.example`](#2-envexample)
 3. [`.gitignore`](#3-gitignore)
@@ -41,6 +43,7 @@ pydantic>=2.0.0
 ```
 
 ### Line-by-Line Breakdown:
+
 - **`mcp>=1.3.0`**:
   - *Kyun*: Anthropic ka official Model Context Protocol SDK hai. Yeh stdio transport, JSON-RPC 2.0 frames, aur server/client session primitives provide karta hai.
   - *Aage Use*: Kisi bhi MCP-compatible tool, server, ya client ko Python me banane ke liye yeh foundation library hai.
@@ -71,6 +74,7 @@ GROQ_API_KEY=your_groq_api_key_here
 ```
 
 ### Line-by-Line Breakdown:
+
 - **`GROQ_API_KEY=your_groq_api_key_here`**:
   - *Kyun*: Ek safe placeholder template hai. Yeh batata hai ki project ko chalane ke liye kaunsi key chahiye.
   - *Aage Use*: GitHub par `.env` push nahi hota, lekin `.env.example` dekh kar koi bhi naya developer samajh jata hai ki use `.env` me kya rakhna hai.
@@ -89,6 +93,7 @@ __pycache__/
 ```
 
 ### Line-by-Line Breakdown:
+
 - **`.venv/`**: Virtual environment ke heavy binaries (Python interpreter, pip packages) ko git me commit hone se rokta hai.
 - **`__pycache__/` & `*.pyc`**: Python ke compiled bytecode cache ko git se bahar rakhta hai taaki repo clean rahe.
 - **`.env`**: **Sabse critical line!** Isme user ki private Groq API key hoti hai. Is line ki wajah se API key kabhi bhi public GitHub repo me leak nahi hoti.
@@ -115,6 +120,7 @@ __pycache__/
 ```
 
 ### Line-by-Line Breakdown:
+
 - **`"mcpServers"`**: Anthropic MCP ka universal configuration key hai jise Claude Desktop, Cursor, aur Claude Code recognise karte hain.
 - **`"movie-server"`**: Server ka friendly identifier name.
 - **`"type": "stdio"`**: Transport mechanism batata hai ki communication standard input/output streams ke through hogi (koi network port block hone ka issue nahi).
@@ -141,6 +147,7 @@ __pycache__/
 ```
 
 ### Line-by-Line Breakdown:
+
 - *Kyun*: Cursor IDE project-level MCP configurations ke liye `.cursor/mcp.json` path expect karta hai.
 - *Aage Use*: Jaise hi aap is project ko Cursor me open karte hain, Cursor automatically `movie-server` ko detect karke green status dikha deta hai aur Cursor AI composer me `@movie-server` tool available ho jata hai.
 
@@ -165,6 +172,7 @@ __pycache__/
 ```
 
 ### Line-by-Line Breakdown:
+
 - **`id` (int)**: Unique identifier. Tool calls jaise `get_movie_details(movie_id=1)` aur `get_movie_rating(movie_id=1)` ke liye primary key ka kaam karta hai.
 - **`title` & `director` (str)**: Search matching aur filtering ke liye use hote hain.
 - **`year` (int)**: Temporal queries jaise *"after 2010"* ko answer karne me madad karta hai.
@@ -178,6 +186,7 @@ __pycache__/
 # 7. `server/mcp_server.py`
 
 ### Block 1: Imports & Version Compatibility (Lines 24–33)
+
 ```python
 import json
 import os
@@ -190,6 +199,7 @@ except (ImportError, ModuleNotFoundError):
     # MCP v2.x import (FastMCP was renamed to MCPServer in mcp 2.x)
     from mcp.server import MCPServer as FastMCP
 ```
+
 - **Line 24–27**: Standard library imports:
   - `json`: `movies.json` ko parse karne ke liye.
   - `Path`: Cross-platform (Windows/Linux/Mac) file paths handle karne ke liye.
@@ -201,6 +211,7 @@ except (ImportError, ModuleNotFoundError):
 ---
 
 ### Block 2: Server Initialization & Data Loading (Lines 40–51)
+
 ```python
 mcp = FastMCP("Movie-Server")
 DATA_FILE = Path(__file__).parent.parent / "data" / "movies.json"
@@ -212,6 +223,7 @@ def _load_movies() -> List[Dict[str, Any]]:
     with open(DATA_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 ```
+
 - **Line 40 (`mcp = FastMCP("Movie-Server")`)**:
   - *Kyun*: FastMCP server application instance create karta hai. `"Movie-Server"` identifier client ko handshake ke dauran bheja jata hai.
 - **Line 43 (`DATA_FILE = ...`)**:
@@ -222,6 +234,7 @@ def _load_movies() -> List[Dict[str, Any]]:
 ---
 
 ### Block 3: Tool 1 — `search_movies` (Lines 63–96)
+
 ```python
 @mcp.tool()
 def search_movies(query: str) -> str:
@@ -253,6 +266,7 @@ def search_movies(query: str) -> str:
     ]
     return f"Found {len(matches)} movie(s):\n" + "\n".join(results)
 ```
+
 - **Line 63 (`@mcp.tool()`)**:
   - *Kyun*: Function ko MCP tool ke taur par register karta hai. FastMCP is function ka naam, docstring, aur `query: str` ko inspect karke valid JSON Schema auto-generate karta hai.
 - **Line 66–87**:
@@ -265,6 +279,7 @@ def search_movies(query: str) -> str:
 ---
 
 ### Block 4: Tool 2 — `get_movie_details` (Lines 100–114)
+
 ```python
 @mcp.tool()
 def get_movie_details(movie_id: int) -> str:
@@ -283,6 +298,7 @@ def get_movie_details(movie_id: int) -> str:
             )
     return f"Error: Movie with ID {movie_id} was not found."
 ```
+
 - **Line 100 (`movie_id: int`)**:
   - Type hint `int` hone ki wajah se FastMCP JSON Schema me `"type": "integer"` declare karta hai. LLM string ke bajaye number pass karta hai.
 - **Line 105–113**:
@@ -291,6 +307,7 @@ def get_movie_details(movie_id: int) -> str:
 ---
 
 ### Block 5: Tool 3 — `get_director_movies` (Lines 118–131)
+
 ```python
 @mcp.tool()
 def get_director_movies(director: str) -> str:
@@ -308,12 +325,14 @@ def get_director_movies(director: str) -> str:
     ]
     return f"Movies directed by {matches[0]['director']} ({len(matches)} total):\n" + "\n".join(results)
 ```
+
 - **Kyun**: Queries jaise *"Which Christopher Nolan movie has the highest rating?"* ke liye yeh most optimal tool hai.
 - Ek hi request me us director ki saari movies ratings ke sath return kar deta hai, jisse LLM turant compare karke highest rating determine kar leta hai.
 
 ---
 
 ### Block 6: Tool 4 — `get_movie_rating` (Lines 135–141)
+
 ```python
 @mcp.tool()
 def get_movie_rating(movie_id: int) -> str:
@@ -324,15 +343,18 @@ def get_movie_rating(movie_id: int) -> str:
             return f"Movie: '{m['title']}' (ID: {m['id']}) has a rating of {m['rating']} / 10."
     return f"Error: Movie with ID {movie_id} was not found."
 ```
+
 - **Kyun**: Jab user sirf rating poochna chahe (e.g. *"What is the rating of movie ID 2?"*), toh plot aur cast ka unnecessary token payload bhej kar context window waste karne ki zaroorat nahi hoti.
 
 ---
 
 ### Block 7: Server Entrypoint (Lines 147–150)
+
 ```python
 if __name__ == "__main__":
     mcp.run(transport="stdio")
 ```
+
 - **Line 147–150**:
   - `transport="stdio"`: Server standard input se JSON-RPC 2.0 requests read karta hai aur standard output par responses likhta hai.
   - **Golden Rule of MCP**: Stdio server ke andar normal `print()` nahi lagana chahiye, kyunki standard print stdout stream ko corrupt kar dega jisse JSON-RPC frame parse error aa jayega.
@@ -342,6 +364,7 @@ if __name__ == "__main__":
 # 8. `client/agent.py`
 
 ### Block 1: Imports & Setup (Lines 16–31)
+
 ```python
 import os
 from typing import Annotated, Any, Dict, List, Sequence
@@ -356,6 +379,7 @@ from mcp import ClientSession
 
 load_dotenv()
 ```
+
 - `Annotated` & `add_messages`: LangGraph state management me messages list ko append karne ke liye reducer.
 - `ClientSession`: MCP SDK ka core client class jo server se handshake aur tool calling karta hai.
 - `load_dotenv()`: `.env` file se API keys memory me load karta hai.
@@ -363,16 +387,19 @@ load_dotenv()
 ---
 
 ### Block 2: LangGraph State Definition (Lines 38–40)
+
 ```python
 class AgentState(TypedDict):
     messages: Annotated[Sequence[BaseMessage], add_messages]
 ```
+
 - **Kyun**: LangGraph ek stateful graph hai. Is state me `messages` store hoti hain.
 - `add_messages` ka role: Jab naya message aata hai (jaise user ka sawaal, LLM ka tool call decision, ya tool ka result), toh purani list replace nahi hoti, balki naya message end me jud (append) jata hai.
 
 ---
 
 ### Block 3: Offline Mock LLM (Lines 48–72)
+
 ```python
 class MockChatGroq:
     async def ainvoke(self, messages: Sequence[BaseMessage]) -> AIMessage:
@@ -393,12 +420,14 @@ class MockChatGroq:
                 content="Based on the movie records retrieved from the MCP Server, Christopher Nolan's highest-rated movie is 'The Dark Knight' (2008) with an IMDb rating of 9.0 / 10."
             )
 ```
+
 - **Kyun**: Testing aur offline verification ke liye.
 - Agar kisi ke paas internet ya Groq API key na ho, tab bhi yeh LangGraph ke state machine aur real MCP stdio tool calling loop ko locally verify karta hai.
 
 ---
 
 ### Block 4: Building the Graph & Dynamic Tool Binding (Lines 78–120)
+
 ```python
 def build_agent_graph(session: ClientSession, mcp_tools: List[Any], use_mock: bool = False):
     if use_mock:
@@ -429,6 +458,7 @@ def build_agent_graph(session: ClientSession, mcp_tools: List[Any], use_mock: bo
 
         llm_with_tools = llm.bind_tools(groq_tool_schemas)
 ```
+
 - **Line 98 (`temperature=0.0`)**: Deterministic and accurate tool calls ke liye temperature 0 rakha jata hai taaki model hallucinate na kare.
 - **Line 105–116 (`Dynamic Tool Schemas`)**:
   - Har MCP tool object me `tool.name`, `tool.description`, aur `tool.inputSchema` hota hai.
@@ -438,18 +468,21 @@ def build_agent_graph(session: ClientSession, mcp_tools: List[Any], use_mock: bo
 ---
 
 ### Block 5: LangGraph Node 1 — `call_model` (Lines 124–128)
+
 ```python
 async def call_model(state: AgentState) -> Dict[str, Any]:
     messages = state["messages"]
     response = await llm_with_tools.ainvoke(messages)
     return {"messages": [response]}
 ```
+
 - State me maujood chat history Groq LLM ko pass karta hai.
 - Groq ya toh text response deta hai ya `AIMessage.tool_calls` request karta hai.
 
 ---
 
 ### Block 6: LangGraph Node 2 — `call_mcp_tools` (Lines 133–182)
+
 ```python
 async def call_mcp_tools(state: AgentState) -> Dict[str, Any]:
     last_message = state["messages"][-1]
@@ -491,6 +524,7 @@ async def call_mcp_tools(state: AgentState) -> Dict[str, Any]:
 
     return {"messages": tool_messages}
 ```
+
 - **Line 158 (`session.call_tool(...)`)**:
   - Yeh line **asli MCP client-server magic** hai!
   - Yeh memory me local function call nahi karta, balki client pipe se server process ko JSON-RPC `tools/call` message bhejta hai.
@@ -500,6 +534,7 @@ async def call_mcp_tools(state: AgentState) -> Dict[str, Any]:
 ---
 
 ### Block 7: Conditional Edge & Graph Compilation (Lines 187–221)
+
 ```python
 def should_continue(state: AgentState) -> str:
     last_message = state["messages"][-1]
@@ -515,6 +550,7 @@ workflow.add_conditional_edges("agent", should_continue, {"tools": "tools", "end
 workflow.add_edge("tools", "agent")
 app = workflow.compile()
 ```
+
 - **`should_continue`**:
   - Agar last message me `tool_calls` hain, toh graph `"tools"` node par jata hai.
   - Agar tool calls nahi hain (final answer ready hai), toh `"end"` (`END`) par jata hai.
@@ -524,6 +560,7 @@ app = workflow.compile()
 ---
 
 ### Block 8: System Instruction & Query Execution (Lines 225–254)
+
 ```python
 SYSTEM_INSTRUCTION = (
     "You are an AI Movie Research Assistant with access to an MCP-powered local movie database.\n"
@@ -545,6 +582,7 @@ async def run_query(app: Any, query: str) -> str:
     final_message = final_state["messages"][-1]
     return final_message.content
 ```
+
 - **`SYSTEM_INSTRUCTION`**: Guardrail jo hallucination aur infinite retry loops ko rokta hai jab koi aisi movie poochna chahe jo database me nahi hai.
 - **`run_query`**: StateGraph ko trigger karta hai aur final message ka content return karta hai.
 
@@ -553,6 +591,7 @@ async def run_query(app: Any, query: str) -> str:
 # 9. `client/main.py`
 
 ### Block 1: Windows Console UTF-8 Reconfiguration (Lines 29–36)
+
 ```python
 if sys.platform == "win32":
     try:
@@ -561,12 +600,14 @@ if sys.platform == "win32":
     except Exception:
         pass
 ```
+
 - **Kyun**: Windows PowerShell default me `charmap` (Windows-1252) encoding use karta hai. Jab LLM UTF-8 special characters (jaise `\u202f`, quotes, emojis) return karta hai, toh Windows console crash ho jata hai.
 - Yeh code standard output ko UTF-8 me reconfigure kar deta hai, jisse 0 crash guarantee hoti hai.
 
 ---
 
 ### Block 2: Low-Level MCP Verification (`run_mcp_verification`) (Lines 55–96)
+
 ```python
 async def run_mcp_verification(session: ClientSession) -> bool:
     tools_result = await session.list_tools()
@@ -576,6 +617,7 @@ async def run_mcp_verification(session: ClientSession) -> bool:
     rating_call = await session.call_tool("get_movie_rating", {"movie_id": 1})
     ...
 ```
+
 - **Kyun**: LLM ke bina pure protocol ko test karta hai:
   - Step 1: `tools/list` returns all 4 tools.
   - Step 2: `tools/call` for `search_movies("Inception")` works.
@@ -585,6 +627,7 @@ async def run_mcp_verification(session: ClientSession) -> bool:
 ---
 
 ### Block 3: External Host Verification (`run_external_host_verification`) (Lines 102–165)
+
 ```python
 async def run_external_host_verification() -> bool:
     config_file = Path(__file__).parent.parent / ".mcp.json"
@@ -598,12 +641,14 @@ async def run_external_host_verification() -> bool:
     )
     ...
 ```
+
 - **Kyun**: External host simulation.
 - Yeh verify karta hai ki [`.mcp.json`](.mcp.json) configuration file me koi path ya syntax error toh nahi hai, aur Cursor ya Claude Desktop bina kisi dikkat ke server se jud sakte hain ya nahi.
 
 ---
 
 ### Block 4: Autonomous Server Launch & Stdio Transport (Lines 186–212)
+
 ```python
 server_params = StdioServerParameters(
     command=sys.executable,
@@ -618,6 +663,7 @@ async with stdio_client(server_params) as (read_stream, write_stream):
         tools_response = await session.list_tools()
         mcp_tools = tools_response.tools
 ```
+
 - **Line 186–193**: `sys.executable` use karke running virtual environment ka Python use karta hai aur `mcp_server.py` ko sub-process banata hai.
 - **Line 198**: `stdio_client` stdin aur stdout pipes open karta hai.
 - **Line 201**: `ClientSession` manage karta hai.
@@ -627,6 +673,7 @@ async with stdio_client(server_params) as (read_stream, write_stream):
 ---
 
 ### Block 5: CLI Arguments & Interactive Chat Loop (Lines 227–305)
+
 ```python
 if "--verify" in sys.argv:
     await run_mcp_verification(session)
@@ -642,6 +689,7 @@ while True:
     answer = await run_query(agent_app, user_input)
     print(f"\nFINAL ANSWER:\n{answer}\n")
 ```
+
 - **Line 227–248**: `--verify` flag handling.
 - **Line 176–178**: `--verify-external` flag handling.
 - **Line 254–264**: One-shot terminal arguments (e.g. `python client/main.py "Tell me about Inception"`).
@@ -650,24 +698,26 @@ while True:
 ---
 
 ### Block 6: Async Entrypoint (Lines 307–310)
+
 ```python
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+
 - Starts the top-level asyncio event loop for non-blocking I/O execution.
 
 ---
 
 ## 🎯 Summary Matrix
 
-| File | Primary Role | Key Protocol / Architecture Concept |
-|---|---|---|
-| `requirements.txt` | Dependency Specification | Official `mcp` SDK + `langgraph` + `langchain-groq` |
-| `.env.example` | Security Template | Protects API credentials via 12-Factor principles |
-| `.gitignore` | Version Control Hygiene | Prevents secret leakage (`.env`) and bloat (`.venv`) |
-| `.mcp.json` | Universal MCP Host Config | Portable config for Claude Code & external tools |
-| `.cursor/mcp.json` | Cursor IDE Integration | Instant workspace tool discovery in Cursor |
-| `data/movies.json` | Authoritative Data Layer | 20 curated movie profiles with ratings & metadata |
-| `server/mcp_server.py` | Standalone MCP Server | FastMCP auto-schema generator & stdio JSON-RPC 2.0 dispatcher |
-| `client/agent.py` | Agent & MCP Client Bridge | LangGraph cyclic StateGraph + Dynamic tool schema binding |
-| `client/main.py` | Autonomous CLI Runner | Automatic subprocess management, UTF-8 console fix, verification suite |
+| File                     | Primary Role              | Key Protocol / Architecture Concept                                    |
+| ------------------------ | ------------------------- | ---------------------------------------------------------------------- |
+| `requirements.txt`     | Dependency Specification  | Official`mcp` SDK + `langgraph` + `langchain-groq`               |
+| `.env.example`         | Security Template         | Protects API credentials via 12-Factor principles                      |
+| `.gitignore`           | Version Control Hygiene   | Prevents secret leakage (`.env`) and bloat (`.venv`)               |
+| `.mcp.json`            | Universal MCP Host Config | Portable config for Claude Code & external tools                       |
+| `.cursor/mcp.json`     | Cursor IDE Integration    | Instant workspace tool discovery in Cursor                             |
+| `data/movies.json`     | Authoritative Data Layer  | 20 curated movie profiles with ratings & metadata                      |
+| `server/mcp_server.py` | Standalone MCP Server     | FastMCP auto-schema generator & stdio JSON-RPC 2.0 dispatcher          |
+| `client/agent.py`      | Agent & MCP Client Bridge | LangGraph cyclic StateGraph + Dynamic tool schema binding              |
+| `client/main.py`       | Autonomous CLI Runner     | Automatic subprocess management, UTF-8 console fix, verification suite |
